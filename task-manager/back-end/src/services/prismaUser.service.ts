@@ -1,5 +1,7 @@
+import { PrismaClient } from "@prisma/client";
 import { CreateUserType } from "../@types/custom-types";
-import { prismaService } from "./index.service";
+
+export const prismaService = new PrismaClient();
 
 class UserPrisma {
   async createUser({ name, email, password }: CreateUserType) {
@@ -32,6 +34,19 @@ class UserPrisma {
     } catch (error) {
       console.error(
         `Error ao buscar o usúario vindo do Prisma Service: ${error}`
+      );
+    } finally {
+      await prismaService.$disconnect();
+    }
+  }
+
+  async getAllUsers() {
+    try {
+      const getAll = await prismaService.user.findMany();
+      return getAll;
+    } catch (error) {
+      console.error(
+        `Error ao buscar todos os usúario vindo do Prisma Service: ${error}`
       );
     } finally {
       await prismaService.$disconnect();

@@ -2,10 +2,12 @@ import { Request, Response } from "express";
 import UserPrisma from "../services/prismaUser.service";
 import { CreateUserType, GetUserType } from "../@types/custom-types";
 import { comparePassword, hashPassword } from "../utils/bcryptUtil";
+import jwt from "jsonwebtoken";
+import { SECRET_KEY } from "../middlewares/auth";
+
+const userPrisma = new UserPrisma();
 
 class UserController {
-  private userPrisma = new UserPrisma();
-
   async createUser(req: Request, res: Response): Promise<void> {
     try {
       const { name, email, password } = req.body as CreateUserType;
@@ -16,7 +18,7 @@ class UserController {
 
       const passwordHash = await hashPassword(password);
 
-      const create = await this.userPrisma.createUser({
+      const create = await userPrisma.createUser({
         name,
         email,
         password: passwordHash,
@@ -32,7 +34,7 @@ class UserController {
     }
   }
 
-  async getUser(req: Request, res: Response) {
+  async loginUser(req: Request, res: Response) {
     try {
       const { email, password } = req.body as GetUserType;
 
@@ -40,7 +42,7 @@ class UserController {
         res.status(301).json("Email e senha são obrigatórios");
       }
 
-      const user = await this.userPrisma.getUser(email);
+      const user = await userPrisma.getUser(email);
 
       if (!user) {
         return res.status(401).json({ error: "Usuário não encontrado!" });
@@ -51,6 +53,12 @@ class UserController {
       if (!isPasswordValid) {
         return res.status(401).json({ error: "Senha inválida!" });
       }
+
+      const token = jwt.sign({ userId: user.id }, SECRET_KEY, {
+        expiresIn: "24h",
+      });
+
+      res.json(token);
     } catch (error) {
       res.status(501).json(`Um erro interno foi encontrado: ${error}`);
     }
