@@ -21,16 +21,23 @@ function FormLogin() {
 
   const userApi = new UserApi();
   const context = useContext(UserContext);
-  const { setUser } = context;
+  const { setUser, setIsAuthenticated } = context;
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     const { email, password } = data;
+
     try {
       const loginApi = await userApi.login(email, password);
+      if (!loginApi.ok) {
+        throw new Error("Network response was not ok");
+      }
 
-      if (loginApi) {
+      const result = await loginApi.json();
+      if (result.token) {
+        localStorage.setItem("tokenTaskManagerDevelopedByLeo", result.token);
         setUser(email);
-        navigate("/");
+        setIsAuthenticated(true);
+        navigate("/auth/home", { replace: true });
       } else {
         alert(
           "Não foi possível realizar o login! Tente novamente e verifique as suas credenciais de acesso"
@@ -50,9 +57,15 @@ function FormLogin() {
     >
       <div className="relative">
         <input
-          {...register("email", { required: true })}
+          {...register("email", {
+            required: true,
+            pattern: {
+              value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+              message: "O email fornecido não é válido",
+            },
+          })}
           autoFocus={true}
-          type="text"
+          type="email"
           id="email_input"
           className="block px-4 py-2 pt-4 w-full text-sm bg-transparent rounded-lg border border-gray-500 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           placeholder=" "

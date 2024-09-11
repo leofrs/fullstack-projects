@@ -8,8 +8,9 @@ export interface UserProviderProps {
 export interface UserContextType {
   user: string | null;
   setUser: (user: string | null) => void;
-  /*  isAuthenticated: boolean;
+  isAuthenticated: boolean;
   setIsAuthenticated: (isAuthenticated: boolean) => void;
+  /*  
   navigate: NavigateFunction;
   tasks: Task[];
   setTasks: (tasks: Task[]) => void; */

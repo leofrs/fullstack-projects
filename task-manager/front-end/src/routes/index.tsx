@@ -9,26 +9,29 @@ import AddPagePrivate from "../pages/private/AddPagePrivate";
 
 import { useContext } from "react";
 import { UserContext } from "../context/userContext";
+import NotFoundPage from "../pages/NotFoundPage";
 
 function RouterIndex() {
-  const context = useContext(UserContext);
-  const { user } = context;
+  const { isAuthenticated } = useContext(UserContext);
 
   return (
     <Routes>
-      {/*Rotas Privadas antes dos ":" e Rotas Públicas após*/}
-      {user ? (
-        <Route path="/auth/" element={<ProtectedLayout />}>
-          <Route index element={<HomePagePrivate />} />
-          <Route path="/auth/addPage" element={<AddPagePrivate />} />
+      {/* Rotas públicas */}
+      {isAuthenticated ? (
+        <Route path="/" element={<ProtectedLayout />}>
+          <Route index path="auth/home" element={<HomePagePrivate />} />
+          <Route path="addPage" element={<AddPagePrivate />} />
         </Route>
       ) : (
         <Route path="/" element={<PublicLayout />}>
-          <Route index element={<HomePagePublic />} />
-          <Route path="/login" element={<LoginPagePublic />} />
-          <Route path="/register" element={<RegisterPagePublic />} />
+          <Route index path="home" element={<HomePagePublic />} />
+          <Route path="login" element={<LoginPagePublic />} />
+          <Route path="register" element={<RegisterPagePublic />} />
         </Route>
       )}
+
+      {/* Rota 404 */}
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
 }
