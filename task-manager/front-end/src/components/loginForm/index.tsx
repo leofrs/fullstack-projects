@@ -1,4 +1,9 @@
 import { useForm, SubmitHandler } from "react-hook-form";
+import { UserApi } from "../../api/user";
+import { useContext } from "react";
+import { UserContext } from "../../context/userContext";
+
+import { useNavigate } from "react-router-dom";
 
 interface IFormInput {
   email: string;
@@ -11,7 +16,32 @@ function FormLogin() {
     handleSubmit,
     formState: { errors },
   } = useForm<IFormInput>();
-  const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
+
+  const navigate = useNavigate();
+
+  const userApi = new UserApi();
+  const context = useContext(UserContext);
+  const { setUser } = context;
+
+  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+    const { email, password } = data;
+    try {
+      const loginApi = await userApi.login(email, password);
+
+      if (loginApi) {
+        setUser(email);
+        navigate("/");
+      } else {
+        alert(
+          "Não foi possível realizar o login! Tente novamente e verifique as suas credenciais de acesso"
+        );
+      }
+    } catch (error) {
+      alert(
+        `Error interno encontrado ao tentar realizar o login! Tente novamente mais tarde: ${error}`
+      );
+    }
+  };
 
   return (
     <form

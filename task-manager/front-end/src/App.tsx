@@ -1,10 +1,13 @@
 import { BrowserRouter } from "react-router-dom";
 import RouterIndex from "./routes";
+import { UserProvider } from "./context/userContext";
 
 function App() {
   return (
     <BrowserRouter>
-      <RouterIndex />
+      <UserProvider>
+        <RouterIndex />
+      </UserProvider>
     </BrowserRouter>
   );
 }
