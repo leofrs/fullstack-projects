@@ -34,7 +34,7 @@ function FormLogin() {
 
       const result = await loginApi.json();
       if (result.token) {
-        localStorage.setItem("tokenTaskManagerDevelopedByLeo", result.token);
+        localStorage.setItem("token", result.token);
         setUser(email);
         setIsAuthenticated(true);
         navigate("/auth/home", { replace: true });

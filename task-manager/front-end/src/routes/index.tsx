@@ -24,7 +24,7 @@ function RouterIndex() {
         </Route>
       ) : (
         <Route path="/" element={<PublicLayout />}>
-          <Route index path="home" element={<HomePagePublic />} />
+          <Route index element={<HomePagePublic />} />
           <Route path="login" element={<LoginPagePublic />} />
           <Route path="register" element={<RegisterPagePublic />} />
         </Route>

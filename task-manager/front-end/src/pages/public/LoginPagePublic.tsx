@@ -21,13 +21,13 @@ function LoginPagePublic() {
       </div>
 
       <div className="flex justify-center items-center w-full h-full flex-wrap">
-        <div className="w-2/4 h-full p-8 flex flex-col items-center justify-center">
-          <h1 className="text-3xl font-bold text-center cursor-default">
+        <div className="w-2/4 h-full p-8 flex flex-col items-center justify-center max-sm:p-2 max-sm:w-full">
+          <h1 className="text-3xl font-bold text-center cursor-default max-sm:w-full">
             Faça o login
           </h1>
           <FormLogin />
         </div>
-        <div className="w-2/4 h-full flex flex-col justify-center items-center gap-12 p-8 cursor-default">
+        <div className="w-2/4 h-full flex flex-col justify-center items-center gap-12 p-8 cursor-default max-sm:hidden">
           <div>
             <h1 className="text-3xl font-bold text-center">Socrates</h1>
             <p className="italic font-light text-xl text-center">
@@ -50,7 +50,7 @@ function LoginPagePublic() {
         </div>
       </div>
 
-      <div className="w-full h-20 flex justify-start items-center">
+      <div className="w-full h-20 flex justify-start items-center max-sm:justify-center">
         <button
           type="button"
           className="border border-gray-500 rounded-full px-8 py-2 flex gap-4 items-center  hover:border-blue-600"

@@ -15,3 +15,10 @@ export interface UserContextType {
   tasks: Task[];
   setTasks: (tasks: Task[]) => void; */
 }
+
+export type Task = {
+  id: number;
+  title: string;
+  description: string;
+  authorId: number;
+};

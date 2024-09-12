@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { BsArrowRight } from "react-icons/bs";
 import { UserContext } from "../../context/userContext";
 import { useNavigate } from "react-router-dom";
+import CardHomeTask from "../../components/cardHomePagePrivate";
 
 function HomePagePrivate() {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ function HomePagePrivate() {
   };
 
   return (
-    <main className="border border-red-400 w-full h-screen p-16">
+    <main className="w-full h-screen p-16 flex flex-col gap-4">
       <div className="w-full h-20 flex justify-between items-center">
         <h1 className="text-3xl font-bold text-center cursor-default flex flex-col">
           Seja bem vindo!{" "}
@@ -24,11 +25,27 @@ function HomePagePrivate() {
         </h1>
         <button
           type="button"
-          className="border border-gray-500 rounded-full px-8 py-2 flex gap-4 items-center  hover:border-blue-600"
+          className="border border-gray-500 rounded-full px-8 py-2 flex gap-4 items-center hover:border-blue-600"
           onClick={() => handleLogout()}
         >
           <BsArrowRight />
           Sair
+        </button>
+      </div>
+
+      <div className=" w-full h-screen overflow-y-scroll p-4">
+        <div className="w-full h-full">
+          <CardHomeTask />
+        </div>
+      </div>
+
+      <div className="w-full h-auto flex justify-end mt-4">
+        <button
+          type="button"
+          title="AdcTask"
+          className="px-4 py-2 border border-gray-600 rounded-full hover:border-blue-600"
+        >
+          Adicionar Tarefa
         </button>
       </div>
     </main>

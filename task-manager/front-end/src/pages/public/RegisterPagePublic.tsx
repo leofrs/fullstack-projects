@@ -22,11 +22,11 @@ function RegisterPagePublic() {
       </div>
 
       <div className="flex justify-center items-center w-full h-full flex-wrap cursor-default">
-        <div className="w-2/4 h-full p-8 flex flex-col items-center justify-center">
+        <div className="w-2/4 h-full p-8 flex flex-col items-center justify-center max-sm:w-full">
           <h1 className="text-3xl font-bold text-center">Faça o cadastro</h1>
           <FormRegister />
         </div>
-        <div className="w-2/4 h-full flex flex-col justify-center items-center gap-12 p-8">
+        <div className="w-2/4 h-full flex flex-col justify-center items-center gap-12 p-8 max-sm:hidden">
           <div>
             <h1 className="text-3xl font-bold text-center">Socrates</h1>
             <p className="italic font-light text-xl text-center">
@@ -49,7 +49,7 @@ function RegisterPagePublic() {
         </div>
       </div>
 
-      <div className="w-full h-20 flex justify-start items-center">
+      <div className="w-full h-20 flex justify-start items-center max-sm:justify-center">
         <button
           type="button"
           className="cursor-pointer border border-gray-500 rounded-full px-8 py-2 flex gap-4 items-center  hover:border-blue-600"
