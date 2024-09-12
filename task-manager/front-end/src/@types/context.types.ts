@@ -21,9 +21,21 @@ export type Task = {
   title: string;
   description: string;
   authorId: number;
+  isChecked: boolean;
 };
 
 export type CreateTask = {
   title: string;
   description: string;
+};
+
+export type EditTask = {
+  id: number;
+  title: string;
+  description?: string;
+};
+
+export type TaskEditPage = {
+  title: string;
+  description?: string;
 };
