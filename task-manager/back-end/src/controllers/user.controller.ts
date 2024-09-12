@@ -58,7 +58,7 @@ class UserController {
         expiresIn: "24h",
       });
 
-      res.json(token);
+      res.json({ token: token });
     } catch (error) {
       res.status(501).json(`Um erro interno foi encontrado: ${error}`);
     }
