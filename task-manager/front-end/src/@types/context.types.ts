@@ -22,3 +22,8 @@ export type Task = {
   description: string;
   authorId: number;
 };
+
+export type CreateTask = {
+  title: string;
+  description: string;
+};

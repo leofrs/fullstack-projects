@@ -13,6 +13,7 @@ function ProtectedLayout() {
         navigate("/");
       } else {
         setLoading(false);
+        navigate("/auth/home", { replace: false });
       }
     };
 
@@ -21,7 +22,7 @@ function ProtectedLayout() {
     }, 1000);
 
     return () => clearTimeout(timer);
-  }, [isAuthenticated, navigate]);
+  }, [isAuthenticated]);
 
   if (loading) {
     return (

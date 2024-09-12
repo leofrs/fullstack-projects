@@ -13,7 +13,7 @@ function HomePagePrivate() {
     localStorage.removeItem("token");
     sessionStorage.clear();
     setIsAuthenticated(false);
-    navigate("/home");
+    navigate("/");
   };
 
   return (
@@ -44,6 +44,7 @@ function HomePagePrivate() {
           type="button"
           title="AdcTask"
           className="px-4 py-2 border border-gray-600 rounded-full hover:border-blue-600"
+          onClick={() => navigate("/addPage")}
         >
           Adicionar Tarefa
         </button>

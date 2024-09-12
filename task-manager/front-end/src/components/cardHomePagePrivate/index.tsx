@@ -5,33 +5,27 @@ import { Task } from "../../@types/context.types";
 function CardHomeTask() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const taskApi = new TaskApi();
     const getTaskByAuthor = async () => {
       try {
-        const getBy = await taskApi.getTaskByAuthor();
-        if (getBy && getBy.length > 0) {
-          setTasks(getBy);
-        } else {
-          setTasks([]);
+        const response = await taskApi.getTaskByAuthor();
+        if (!response || !Array.isArray(response)) {
+          throw new Error("Dados inválidos retornados da API.");
         }
+        setTasks(response);
       } catch (error) {
-        setError(`Erro ao carregar tarefas: ${error}`);
+        console.error(`Erro ao carregar tarefas: ${error}`);
       } finally {
         setIsLoading(false);
       }
     };
     getTaskByAuthor();
-  }, []);
+  }, [tasks]);
 
   if (isLoading) {
     return <p>Carregando...</p>;
-  }
-
-  if (error) {
-    return <p>{error}</p>;
   }
 
   if (tasks.length === 0) {
@@ -44,14 +38,32 @@ function CardHomeTask() {
 
   return (
     <>
-      {tasks.map((task) => (
+      {tasks.map((task: Task) => (
         <main
           key={task.id}
           className="w-full h-auto border border-blue-400 rounded-xl flex justify-between px-4 py-2 mb-2"
         >
-          <div className="w-3/4 flex flex-col gap-2 items-start cursor-default">
-            <h4 className="font-medium">Título: {task.title}</h4>
-            <p className="font-medium">Descrição: {task.description}</p>
+          <div className="w-full flex gap-4 items-center cursor-default">
+            <input
+              type="checkbox"
+              name="checked"
+              id="checked"
+              title="checked"
+              className=""
+            />
+            <div className="w-3/4 flex flex-col">
+              <h4 className="font-medium">Título: {task.title}</h4>
+              {task.description ? (
+                <p className="font-medium">Descrição: {task.description}</p>
+              ) : (
+                <p className="font-medium">
+                  Descrição:{" "}
+                  <span className="font-light italic text-red-500">
+                    Nenhuma descrição foi encontrada
+                  </span>
+                </p>
+              )}
+            </div>
           </div>
           <div className="flex gap-4 items-center">
             <button type="button">Editar</button>

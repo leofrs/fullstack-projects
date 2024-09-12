@@ -20,6 +20,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+
     if (token) {
       setIsAuthenticated(true);
     } else {
