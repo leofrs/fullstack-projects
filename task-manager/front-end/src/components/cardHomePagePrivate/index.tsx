@@ -68,10 +68,14 @@ function CardHomeTask() {
     if (isConfirmed) {
       try {
         const taskApi = new TaskApi();
-        await taskApi.deleteTaskId(id);
-        const updatedTasks = tasks.filter((task) => task.id !== id);
-        setTasks(updatedTasks);
-        localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+        const del = await taskApi.deleteTaskId(id);
+        if (del) {
+          alert("Tarefa excluida com sucesso!");
+          const updatedTasks = tasks.filter((task) => task.id !== id);
+          setTasks(updatedTasks);
+        } else {
+          alert("Não foi possivel excluir! Tente novamente mais tarde");
+        }
       } catch (error) {
         alert("Um erro foi encontrado, tente novamente mais tarde: " + error);
       }

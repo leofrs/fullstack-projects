@@ -35,10 +35,10 @@ export default function FormUpdateTask({ task, onClose }: FormUpdateTaskProps) {
         onClose();
       } else {
         alert("Não foi possível atualizar a tarefa");
+        onClose();
       }
     } catch (error) {
-      console.error("Erro ao atualizar a tarefa:", error);
-      alert("Erro ao atualizar a tarefa.");
+      alert("Erro ao atualizar a tarefa: " + error);
     }
   };
 

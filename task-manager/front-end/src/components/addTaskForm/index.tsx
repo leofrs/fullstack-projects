@@ -27,7 +27,7 @@ export default function AddTaskForm() {
         alert("Tarefa criada com sucesso");
         data.title = "";
         data.description = "";
-        navigate("/auth/home");
+        navigate("/");
       } else {
         alert("Algo de errado aconteceu! Tente novamente");
       }
