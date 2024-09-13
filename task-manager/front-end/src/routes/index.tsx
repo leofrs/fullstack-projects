@@ -19,7 +19,7 @@ function RouterIndex() {
       {isAuthenticated ? (
         <>
           <Route path="/" element={<ProtectedLayout />}>
-            <Route index element={<HomePagePrivate />} />
+            <Route index path="/auth/home" element={<HomePagePrivate />} />
             <Route path="addPage" element={<AddPagePrivate />} />
           </Route>
         </>

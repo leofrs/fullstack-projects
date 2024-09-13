@@ -27,10 +27,7 @@ function FormLogin() {
     const { email, password } = data;
 
     try {
-      const loginApi = await userApi.login(email, password);
-      if (!loginApi.ok) {
-        throw new Error("Network response was not ok");
-      }
+      const loginApi = await userApi.login({ email, password });
 
       const result = await loginApi.json();
 

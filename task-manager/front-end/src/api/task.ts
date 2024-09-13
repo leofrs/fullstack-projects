@@ -24,7 +24,6 @@ export class TaskApi {
     const token = localStorage.getItem("token");
     const response = await fetch(`${url}`, {
       method: "GET",
-
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
