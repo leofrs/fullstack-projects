@@ -11,10 +11,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://task-manager-front-end-kohl.vercel.app",
-    methods: "GET,POST,PUT,DELETE,OPTIONS",
-    allowedHeaders: "Content-Type,Authorization",
-    credentials: true,
+    origin: "https://fullstack-projects-alpha.vercel.app",
   })
 );
 app.use(express.json());
