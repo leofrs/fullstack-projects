@@ -26,7 +26,7 @@ function CardHomeTask() {
       }
     };
     getTaskByAuthor();
-  }, [tasks]);
+  }, []);
 
   if (isLoading) {
     return <p>Carregando...</p>;
@@ -40,32 +40,20 @@ function CardHomeTask() {
     );
   }
 
-  /* const handleCheckboxChange = (id: number) => {
+  const handleCheckboxChange = async (id: number, isChecked: boolean) => {
+    const newChecked = !isChecked;
+    const updatedTasks = tasks.map((task) =>
+      task.id === id ? { ...task, isChecked: newChecked } : task
+    );
+    setTasks(updatedTasks);
+
+    const taskApi = new TaskApi();
     try {
-      // Atualize o estado local
-      const updatedTasks = tasks.map((task) =>
-        task.id === id ? { ...task, isChecked: !task.isChecked } : task
-      );
-      
-      setTasks(updatedTasks);
-      
-      // Envie a atualização para o servidor
-      const updatedTask = updatedTasks.find(task => task.id === id);
-      if (updatedTask) {
-        await fetch(`https://sua-api.com/tasks/${id}`, {
-          method: 'PATCH', // ou 'PUT', dependendo da sua API
-          headers: {
-            'Content-Type': 'application/json',
-            // Inclua outros cabeçalhos conforme necessário, como um token de autenticação
-          },
-          body: JSON.stringify({ isChecked: updatedTask.isChecked }),
-        });
-      }
+      await taskApi.taskConclude({ id, isChecked: newChecked });
     } catch (error) {
-      console.error('Erro ao atualizar a tarefa:', error);
-      // Aqui você pode querer tratar o erro, por exemplo, revertendo a atualização local
+      console.error("Erro ao atualizar a tarefa:", error);
     }
-  }; */
+  };
 
   const handleEditClick = (task: Task) => {
     setTaskToEdit(task);
@@ -73,14 +61,20 @@ function CardHomeTask() {
   };
 
   const handleDelete = async (id: number) => {
-    try {
-      const taskApi = new TaskApi();
-      await taskApi.deleteTaskId(id);
-      const updatedTasks = tasks.filter((task) => task.id !== id);
-      setTasks(updatedTasks);
-      localStorage.setItem("tasks", JSON.stringify(updatedTasks));
-    } catch (error) {
-      alert("Um erro foi encontrado, tente novamente mais tarde: " + error);
+    const isConfirmed = window.confirm(
+      "Tem certeza de que deseja excluir esta tarefa?"
+    );
+
+    if (isConfirmed) {
+      try {
+        const taskApi = new TaskApi();
+        await taskApi.deleteTaskId(id);
+        const updatedTasks = tasks.filter((task) => task.id !== id);
+        setTasks(updatedTasks);
+        localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+      } catch (error) {
+        alert("Um erro foi encontrado, tente novamente mais tarde: " + error);
+      }
     }
   };
 
@@ -95,31 +89,33 @@ function CardHomeTask() {
         return (
           <main
             key={id}
-            className="w-full h-auto border border-blue-400 rounded-xl flex justify-between px-4 py-2 mb-2"
+            className="w-full h-auto border border-blue-400 rounded-xl flex justify-between px-4 py-2 mb-2 max-sm:flex-col"
           >
             <div className="w-full flex gap-4 items-center cursor-default">
               <input
                 type="checkbox"
                 title="checkbox for tasks"
                 checked={isChecked}
-                // onChange={() => handleCheckboxChange(id)}
-                className="accent-emerald-500/25"
+                onChange={() => handleCheckboxChange(id, isChecked)}
+                className="accent-blue-500"
               />
-              <div className="w-3/4 flex flex-col">
+              <div className="w-3/4 flex flex-col max-sm:gap-2">
                 <h4
                   className={`font-medium ${isChecked ? "line-through" : ""}`}
                 >
-                  Título: {title}
+                  <span className=" text-blue-500">Título: </span>
+                  {title}
                 </h4>
                 {description ? (
                   <p
                     className={`font-medium ${isChecked ? "line-through" : ""}`}
                   >
-                    Descrição: {description}
+                    <span className=" text-blue-500">Descrição: </span>
+                    {description}
                   </p>
                 ) : (
                   <p className="font-medium">
-                    Descrição:{" "}
+                    <span className=" text-blue-500">Descrição: </span>
                     <span className="font-light italic text-red-500">
                       Nenhuma descrição foi encontrada
                     </span>
@@ -127,7 +123,7 @@ function CardHomeTask() {
                 )}
               </div>
             </div>
-            <div className="flex gap-4 items-center">
+            <div className="flex gap-4 items-center max-sm:justify-evenly max-sm:mt-2 max-sm:border-t-2 max-sm:border-gray-500 max-sm:pt-2">
               <button type="button" onClick={() => handleEditClick(task)}>
                 Editar
               </button>

@@ -33,10 +33,12 @@ function FormLogin() {
       }
 
       const result = await loginApi.json();
+
       if (result.token) {
         localStorage.setItem("token", result.token);
-        setUser(email);
         setIsAuthenticated(true);
+        localStorage.setItem("userName", result.userName);
+        setUser(result.userName);
         navigate("/auth/home", { replace: true });
       } else {
         alert(

@@ -39,3 +39,8 @@ export type TaskEditPage = {
   title: string;
   description?: string;
 };
+
+export type TaskConclude = {
+  id: number;
+  isChecked: boolean;
+};

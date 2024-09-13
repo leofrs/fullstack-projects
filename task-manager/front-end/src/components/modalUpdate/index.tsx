@@ -21,7 +21,7 @@ export default function ModalAdd({ isOpen, onClose, children }: ModalProps) {
       onClick={handleBackdropClick}
     >
       <div
-        className="relative bg-white p-8 rounded-lg max-w-[500px] h-auto w-full flex justify-center border border-red-400"
+        className="relative bg-white p-8 rounded-lg max-w-[500px] h-auto w-full flex justify-center border border-blue-500"
         onClick={handleContentClick}
       >
         <button

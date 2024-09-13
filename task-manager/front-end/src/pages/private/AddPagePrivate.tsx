@@ -7,7 +7,7 @@ function AddPagePrivate() {
 
   return (
     <main className="w-screen h-screen p-16 flex flex-col justify-between items-center">
-      <div className="w-full h-20 flex justify-between items-center">
+      <div className="w-full h-20 flex justify-between items-center max-sm:flex-col max-sm:gap-4 max-sm:h-10">
         <h1 className="text-3xl font-bold text-center cursor-default">
           Criar uma tarefa
         </h1>

@@ -1,4 +1,4 @@
-import { CreateTask, EditTask } from "../@types/context.types";
+import { CreateTask, EditTask, TaskConclude } from "../@types/context.types";
 
 export class TaskApi {
   async createTask({ title, description }: CreateTask) {
@@ -42,7 +42,7 @@ export class TaskApi {
     const url = import.meta.env.VITE_UPDATE_TASK_BY_AUTHOR_ROUTER;
     const token = localStorage.getItem("token");
     const response = await fetch(`${url}`, {
-      method: "POST",
+      method: "PUT",
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
@@ -51,6 +51,29 @@ export class TaskApi {
         id: id,
         title: title,
         description: description,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.statusText}`);
+    }
+
+    const data = response.json();
+    return data;
+  }
+
+  async taskConclude({ id, isChecked }: TaskConclude) {
+    const url = import.meta.env.VITE_UPDATE_TASK_CONCLUDE_BY_AUTHOR_ROUTER;
+    const token = localStorage.getItem("token");
+    const response = await fetch(`${url}`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: id,
+        isChecked: isChecked,
       }),
     });
 
