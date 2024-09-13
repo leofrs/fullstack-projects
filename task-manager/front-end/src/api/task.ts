@@ -24,6 +24,7 @@ export class TaskApi {
     const token = localStorage.getItem("token");
     const response = await fetch(`${url}`, {
       method: "GET",
+      mode: "no-cors",
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
@@ -43,6 +44,7 @@ export class TaskApi {
     const token = localStorage.getItem("token");
     const response = await fetch(`${url}`, {
       method: "PUT",
+      mode: "no-cors",
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
@@ -67,6 +69,7 @@ export class TaskApi {
     const token = localStorage.getItem("token");
     const response = await fetch(`${url}`, {
       method: "PUT",
+      mode: "no-cors",
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
@@ -90,6 +93,7 @@ export class TaskApi {
     const token = localStorage.getItem("token");
     const response = await fetch(`${url}`, {
       method: "DELETE",
+      mode: "no-cors",
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
