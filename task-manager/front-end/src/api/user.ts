@@ -5,7 +5,6 @@ export class UserApi {
   async login(email: string, password: string) {
     const response = await fetch(`${LOGIN_ROUTER}`, {
       method: "POST",
-      mode: "no-cors",
       headers: {
         "Content-Type": "application/json",
       },
@@ -20,7 +19,6 @@ export class UserApi {
   async register(name: string, email: string, password: string) {
     const response = await fetch(`${REGISTER_ROUTER}`, {
       method: "POST",
-      mode: "no-cors",
       headers: {
         "Content-Type": "application/json",
       },
