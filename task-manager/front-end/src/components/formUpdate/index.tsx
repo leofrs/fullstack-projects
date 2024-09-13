@@ -30,8 +30,12 @@ export default function FormUpdateTask({ task, onClose }: FormUpdateTaskProps) {
     const { id } = task;
     try {
       await taskApi.editTaskById({ id, title, description });
-      alert("Tarefa atualizada com sucesso!");
-      onClose();
+      if (taskApi) {
+        alert("Tarefa atualizada com sucesso!");
+        onClose();
+      } else {
+        alert("Não foi possível atualizar a tarefa");
+      }
     } catch (error) {
       console.error("Erro ao atualizar a tarefa:", error);
       alert("Erro ao atualizar a tarefa.");

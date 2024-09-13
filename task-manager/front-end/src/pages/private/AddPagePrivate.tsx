@@ -14,7 +14,7 @@ function AddPagePrivate() {
         <button
           type="button"
           className="border border-gray-500 rounded-full px-8 py-2 flex gap-4 items-center  hover:border-blue-600"
-          onClick={() => navigate("/auth/home")}
+          onClick={() => navigate("/")}
         >
           <BsArrowRight />
           Voltar

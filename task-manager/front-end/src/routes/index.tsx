@@ -16,8 +16,8 @@ function RouterIndex() {
     <Routes>
       {isAuthenticated ? (
         <>
-          <Route index path="/auth/home" element={<HomePagePrivate />} />
-          <Route path="addPage" element={<AddPagePrivate />} />
+          <Route index path="/" element={<HomePagePrivate />} />
+          <Route path="/addPage" element={<AddPagePrivate />} />
         </>
       ) : (
         <>
@@ -27,7 +27,6 @@ function RouterIndex() {
         </>
       )}
 
-      {/* Rota 404 */}
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
