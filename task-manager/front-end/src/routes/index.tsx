@@ -17,13 +17,13 @@ function RouterIndex() {
       {isAuthenticated ? (
         <>
           <Route index path="/" element={<HomePagePrivate />} />
-          <Route path="addPage" element={<AddPagePrivate />} />
+          <Route path="/addPage" element={<AddPagePrivate />} />
         </>
       ) : (
         <>
           <Route path="/" element={<HomePagePublic />} />
-          <Route path="login" element={<LoginPagePublic />} />
-          <Route path="register" element={<RegisterPagePublic />} />
+          <Route path="/login" element={<LoginPagePublic />} />
+          <Route path="/register" element={<RegisterPagePublic />} />
         </>
       )}
 
