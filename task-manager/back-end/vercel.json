@@ -6,7 +6,6 @@
       "use": "@vercel/node"
     }
   ],
-  "dest": "src/index.ts",
   "source": "(.*)",
   "headers": [
     { "Access-Control-Allow-Credentials": "true" },
