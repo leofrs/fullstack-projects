@@ -6,7 +6,7 @@ import adminRouter from "./routes/admin.router";
 import taskRouter from "./routes/tasks.route";
 dotEnv.configDotenv();
 
-const PORT = process.env.PORT;
+const PORT = 3001;
 const app = express();
 
 app.use(cors());

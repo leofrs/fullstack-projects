@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/index.ts",
-    "vercel-build": "npx prisma migrate deploy"
+    "dev": "nodemon src/index.ts"
   },
   "keywords": [
     "CRUD",
