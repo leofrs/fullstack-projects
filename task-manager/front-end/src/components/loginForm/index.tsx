@@ -36,7 +36,7 @@ function FormLogin() {
         setIsAuthenticated(true);
         localStorage.setItem("userName", result.userName);
         setUser(result.userName);
-        navigate("/auth/home", { replace: true });
+        navigate("/", { replace: true });
       } else {
         alert(
           "Não foi possível realizar o login! Tente novamente e verifique as suas credenciais de acesso"
