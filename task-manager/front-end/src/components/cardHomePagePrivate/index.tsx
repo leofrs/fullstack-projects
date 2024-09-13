@@ -26,7 +26,7 @@ function CardHomeTask() {
       }
     };
     getTaskByAuthor();
-  }, []);
+  }, [tasks]);
 
   if (isLoading) {
     return <p>Carregando...</p>;
