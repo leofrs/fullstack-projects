@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import UserPrisma from "../services/prismaUser.service";
+import UserPrisma, { prismaService } from "../services/prismaUser.service";
 import { CreateUserType, GetUserType } from "../@types/custom-types";
 import { comparePassword, hashPassword } from "../utils/bcryptUtil";
 import jwt from "jsonwebtoken";
@@ -58,7 +58,7 @@ class UserController {
         expiresIn: "24h",
       });
 
-      res.json({ token: token });
+      res.json({ userName: user.name, token: token });
     } catch (error) {
       res.status(501).json(`Um erro interno foi encontrado: ${error}`);
     }

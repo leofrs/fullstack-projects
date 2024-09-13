@@ -1,7 +1,11 @@
 import { Request, Response } from "express";
 import TaskPrisma from "../services/prismaTask.service";
 import { CustomRequest } from "../middlewares/auth";
-import { EditTask, TaskInformations } from "../@types/custom-types";
+import {
+  EditTask,
+  TaskConclude,
+  TaskInformations,
+} from "../@types/custom-types";
 
 const taskPrisma = new TaskPrisma();
 
@@ -72,6 +76,27 @@ class TaskController {
     try {
       const edit = taskPrisma.editById({ id, title, description });
       if (!edit) {
+        res
+          .status(301)
+          .json({ Error: `Um error foi encontrado! Tente novamente` });
+      } else {
+        res.status(201).json({ Sucesso: `Tarefa editada com sucesso` });
+      }
+    } catch (error) {
+      res.status(501).json({ Error: `Error interno encontrado: ${error}` });
+    }
+  }
+
+  async taskConclude(req: Request, res: Response) {
+    const { id, isChecked } = req.body as TaskConclude;
+    if (!id && !isChecked) {
+      res
+        .status(401)
+        .json({ Error: `Os campos id e isChecked não podem estar vázios` });
+    }
+    try {
+      const conclude = taskPrisma.taskFinished({ id, isChecked });
+      if (!conclude) {
         res
           .status(301)
           .json({ Error: `Um error foi encontrado! Tente novamente` });

@@ -1,5 +1,9 @@
 import { PrismaClient } from "@prisma/client";
-import { EditTask, TaskInformations } from "../@types/custom-types";
+import {
+  EditTask,
+  TaskConclude,
+  TaskInformations,
+} from "../@types/custom-types";
 
 export const prismaService = new PrismaClient();
 
@@ -76,6 +80,27 @@ class TaskPrisma {
       return edit;
     } catch (error) {
       console.error("Error ao editar a tarefa vindo do prima Service:", error);
+    } finally {
+      await prismaService.$disconnect();
+    }
+  }
+
+  async taskFinished({ id, isChecked }: TaskConclude) {
+    try {
+      const conclude = await prismaService.task.update({
+        where: {
+          id: id,
+        },
+        data: {
+          isChecked: isChecked,
+        },
+      });
+      return conclude;
+    } catch (error) {
+      console.error(
+        "Error ao marcar a tarefa como conluída vindo do prima Service:",
+        error
+      );
     } finally {
       await prismaService.$disconnect();
     }

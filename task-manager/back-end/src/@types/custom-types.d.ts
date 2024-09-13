@@ -20,3 +20,8 @@ export type EditTask = {
   title: string;
   description?: string;
 };
+
+export type TaskConclude = {
+  id: number;
+  isChecked: boolean;
+};
