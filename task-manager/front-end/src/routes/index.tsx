@@ -16,18 +16,21 @@ function RouterIndex() {
 
   return (
     <Routes>
-      {/* Rotas públicas */}
       {isAuthenticated ? (
-        <Route path="/" element={<ProtectedLayout />}>
-          <Route index path="auth/home" element={<HomePagePrivate />} />
-          <Route path="addPage" element={<AddPagePrivate />} />
-        </Route>
+        <>
+          <Route path="/" element={<ProtectedLayout />}>
+            <Route index element={<HomePagePrivate />} />
+            <Route path="addPage" element={<AddPagePrivate />} />
+          </Route>
+        </>
       ) : (
-        <Route path="/" element={<PublicLayout />}>
-          <Route index element={<HomePagePublic />} />
-          <Route path="login" element={<LoginPagePublic />} />
-          <Route path="register" element={<RegisterPagePublic />} />
-        </Route>
+        <>
+          <Route path="/" element={<PublicLayout />}>
+            <Route index element={<HomePagePublic />} />
+            <Route path="login" element={<LoginPagePublic />} />
+            <Route path="register" element={<RegisterPagePublic />} />
+          </Route>
+        </>
       )}
 
       {/* Rota 404 */}
