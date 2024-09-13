@@ -11,6 +11,7 @@ function HomePagePrivate() {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("userName");
     sessionStorage.clear();
     setIsAuthenticated(false);
     navigate("/");

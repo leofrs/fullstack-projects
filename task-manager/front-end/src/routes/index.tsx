@@ -1,6 +1,4 @@
 import { Routes, Route } from "react-router-dom";
-import PublicLayout from "../pages/public/PublicLayout";
-import ProtectedLayout from "../pages/private/ProtectedLayout";
 import HomePagePrivate from "../pages/private/HomePagePrivate";
 import HomePagePublic from "../pages/public/HomePagePublic";
 import LoginPagePublic from "../pages/public/LoginPagePublic";
@@ -18,18 +16,14 @@ function RouterIndex() {
     <Routes>
       {isAuthenticated ? (
         <>
-          <Route path="/" element={<ProtectedLayout />}>
-            <Route index path="/auth/home" element={<HomePagePrivate />} />
-            <Route path="addPage" element={<AddPagePrivate />} />
-          </Route>
+          <Route index path="/auth/home" element={<HomePagePrivate />} />
+          <Route path="addPage" element={<AddPagePrivate />} />
         </>
       ) : (
         <>
-          <Route path="/" element={<PublicLayout />}>
-            <Route index element={<HomePagePublic />} />
-            <Route path="login" element={<LoginPagePublic />} />
-            <Route path="register" element={<RegisterPagePublic />} />
-          </Route>
+          <Route path="/" element={<HomePagePublic />} />
+          <Route path="/login" element={<LoginPagePublic />} />
+          <Route path="/register" element={<RegisterPagePublic />} />
         </>
       )}
 
