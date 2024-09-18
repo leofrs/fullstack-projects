@@ -7,7 +7,7 @@ export default function Home() {
 
     return (
         <main className="w-screen h-screen flex">
-            <section className="w-2/4 h-full p-16 flex flex-col justify-around">
+            <section className="w-2/4 h-full p-16 flex flex-col justify-around bg-[#010433]">
                 <div className="w-16 h-auto ">
                     <img src={bgImage} alt="logo" className="object-fill" />
                 </div>
@@ -18,7 +18,7 @@ export default function Home() {
                         Não é cadastrado?{" "}
                         <span
                             className="underline cursor-pointer"
-                            onClick={() => navigate("/register")}
+                            onClick={() => navigate("register")}
                         >
                             Cadastre-se
                         </span>
