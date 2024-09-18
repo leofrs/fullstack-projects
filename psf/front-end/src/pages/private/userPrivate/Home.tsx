@@ -1,7 +1,10 @@
 export default function HomeUserPrivate() {
     return (
-        <div>
-            <h1>Hello from page home user private</h1>
-        </div>
+        <main className="w-screen h-screen flex">
+            <section className="border border-red-500 w-2/4 h-full">
+                <nav></nav>
+            </section>
+            <section className="border border-red-500 w-2/4 h-full"></section>
+        </main>
     );
 }

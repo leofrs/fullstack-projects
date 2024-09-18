@@ -4,8 +4,8 @@ import { UserContext } from "./context/user.tsx";
 
 function App() {
     const userContext = useContext(UserContext);
-    const user = userContext;
-    return <>{user ? <PrivateUserRoutes /> : <PublicRoutes />}</>;
+    const { isAuthenticated } = userContext;
+    return <>{isAuthenticated ? <PrivateUserRoutes /> : <PublicRoutes />}</>;
 }
 
 export default App;

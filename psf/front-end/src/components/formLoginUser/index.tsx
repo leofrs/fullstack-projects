@@ -1,28 +1,44 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import "react-phone-number-input/style.css";
-import PhoneInput from "react-phone-number-input";
-import { E164Number } from "libphonenumber-js";
+import { useContext } from "react";
+import { UserContext } from "../../context/user";
+import { useNavigate } from "react-router-dom";
 
 interface IFormInput {
     name: string;
     password: string;
-    phone: E164Number | undefined;
+    phone: string;
 }
 
 export default function FormLoginUser() {
+    const context = useContext(UserContext);
+    const navigate = useNavigate();
     const {
         register,
         handleSubmit,
-        formState: { errors },
         setValue,
+        formState: { errors },
     } = useForm<IFormInput>();
 
     const onSubmit: SubmitHandler<IFormInput> = (data) => {
         console.log(data);
+        const { setUser, setIsAuthenticated } = context;
+        setUser(data.name);
+        setIsAuthenticated(true);
+        navigate("/");
     };
 
-    const handlePhoneChange = (phone: E164Number | undefined) => {
-        setValue("phone", phone);
+    const formatPhoneNumber = (value: string) => {
+        const cleaned = ("" + value).replace(/\D/g, "");
+        const match = cleaned.match(/^(\d{2})(\d{5})(\d{4})$/);
+        if (match) {
+            return `(${match[1]}) ${match[2]}-${match[3]}`;
+        }
+        return value;
+    };
+
+    const handlePhoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const formattedValue = formatPhoneNumber(event.target.value);
+        setValue("phone", formattedValue);
     };
 
     return (
@@ -70,19 +86,33 @@ export default function FormLoginUser() {
                 )}
             </div>
 
-            <PhoneInput
-                placeholder="(83) 99999-9999"
-                defaultCountry="BR"
-                countries={["BR"]}
-                value={undefined}
-                onChange={handlePhoneChange}
-                className="border border-gray-500 p-2 rounded-lg"
-            />
-            {errors.phone && (
-                <span className="italic text-red-500 text-sm">
-                    Número é obrigatório
-                </span>
-            )}
+            <div className="relative">
+                <input
+                    {...register("phone", {
+                        required: true,
+                        pattern: {
+                            value: /^\(\d{2}\) \d{5}-\d{4}$/,
+                            message: "Formato inválido. Use (XX) XXXXX-XXXX.",
+                        },
+                    })}
+                    type="tel"
+                    id="phone_input"
+                    onChange={handlePhoneChange}
+                    className="block px-4 py-2 pt-4 w-full text-sm bg-transparent rounded-lg border border-gray-500 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                    placeholder=" "
+                />
+                <label
+                    htmlFor="phone_input"
+                    className="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4"
+                >
+                    Número de telefone
+                </label>
+                {errors.phone?.message && (
+                    <span className="italic text-red-500 text-sm">
+                        {errors.phone.message}
+                    </span>
+                )}
+            </div>
 
             <input type="submit" value="Entrar" className="border p-2" />
         </form>

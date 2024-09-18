@@ -1,8 +1,24 @@
 import { createContext, useState } from "react";
+import { User, UserProviderProps } from "../types";
 
-export const UserContext = createContext<string | null>(null);
+const defaultUserContext: User = {
+    user: null,
+    setUser: () => {},
+    isAuthenticated: false,
+    setIsAuthenticated: () => {},
+};
 
-export const UserProvider = ({ children }) => {
+export const UserContext = createContext<User>(defaultUserContext);
+
+export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     const [user, setUser] = useState<string | null>(null);
-    return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
+    const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+
+    return (
+        <UserContext.Provider
+            value={{ user, setUser, isAuthenticated, setIsAuthenticated }}
+        >
+            {children}
+        </UserContext.Provider>
+    );
 };
