@@ -12,7 +12,7 @@ export const UserContext = createContext<User>(defaultUserContext);
 
 export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     const [user, setUser] = useState<string | null>(null);
-    const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+    const [isAuthenticated, setIsAuthenticated] = useState<boolean>(true);
 
     return (
         <UserContext.Provider

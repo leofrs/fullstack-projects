@@ -1,7 +1,6 @@
-import CardsHomeUser from "../../../components/UserComponents/cardsHomeUser";
 import UserMenu from "../../../components/UserComponents/menuUser";
 
-export default function HomeUserPrivate() {
+export default function MarcarConsulta() {
     return (
         <main className="w-screen h-screen flex p-2 gap-2">
             <section className="border w-1/4 h-full p-8 bg-[#010433] rounded-2xl">
@@ -16,7 +15,7 @@ export default function HomeUserPrivate() {
                     </h3>
                 </div>
                 <div className="border border-[#010433] w-full h-[90%] rounded-2xl p-4">
-                    <CardsHomeUser />
+                    <h1 className="text-black">MArcar COnsulta form</h1>
                 </div>
             </section>
         </main>

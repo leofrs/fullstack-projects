@@ -1,5 +1,5 @@
 import bgImage from "../../assets/psf-bg.jpeg";
-import FormRegisterUser from "../../components/formRegisterUser";
+import FormRegisterUser from "../../components/UserComponents/formRegisterUser";
 import { useNavigate } from "react-router-dom";
 
 export default function Register() {

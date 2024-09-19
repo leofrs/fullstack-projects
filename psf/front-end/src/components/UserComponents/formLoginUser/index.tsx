@@ -1,6 +1,6 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useContext } from "react";
-import { UserContext } from "../../context/user";
+import { UserContext } from "../../../context/user";
 import { useNavigate } from "react-router-dom";
 
 interface IFormInput {

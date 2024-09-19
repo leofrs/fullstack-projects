@@ -4,6 +4,7 @@ import Register from "../pages/public/Register";
 import HomeUserPrivate from "../pages/private/userPrivate/Home";
 import PublicLayout from "../pages/public/Public-Layout";
 import UserPrivateLayout from "../pages/private/userPrivate/User-Private-Layout";
+import MarcarConsulta from "../pages/private/userPrivate/MarcarConsulta";
 
 export const PublicRoutes = () => {
     return (
@@ -23,6 +24,10 @@ export const PrivateUserRoutes = () => {
             <Route path="/" element={<UserPrivateLayout />}>
                 <Route index element={<Navigate to="/auth/user/home" />} />
                 <Route path="auth/user/home" element={<HomeUserPrivate />} />
+                <Route
+                    path="auth/user/marcarConsulta"
+                    element={<MarcarConsulta />}
+                />
             </Route>
         </Routes>
     );

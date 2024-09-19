@@ -1,5 +1,5 @@
 import bgImage from "../../assets/psf-bg.jpeg";
-import FormLoginUser from "../../components/formLoginUser";
+import FormLoginUser from "../../components/UserComponents/formLoginUser";
 import { useNavigate } from "react-router-dom";
 
 export default function Home() {
